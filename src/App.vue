@@ -1,36 +1,57 @@
 <script setup lang="ts">
-import Resize from './components/Resize'
+import { Split, SplitPanel } from './components/splitpanes'
 import { ref } from 'vue';
 
-const open = ref(true);
-const open2 = ref(true);
+const show = ref(true);
 
 </script>
-
 <template>
-  <Resize style="height:100%">
-      <template #left v-if="open">
-        <div class="demo-split-pane" style="background-color: red;">
-          111
-          <button @click="open2 = !open2">{{ !open2 ? '打开右' : '关闭右' }}</button>
-        </div>
-      </template>
-    <template #right v-if="open2">
-      <div class="demo-split-pane" style="background-color: greenyellow;">
-        <button @click="open = !open">{{ !open ? '打开左' : '关闭左' }}</button>
-        Right Pane
-      </div>
-    </template>
-  </Resize>
+  <Split style="height: 300px" class="default-theme">
+    <SplitPanel size="80">1</SplitPanel>
+    <SplitPanel size="20">
+      <button @click="() => show = !show">show{{ show ? 'show' : 'no-show' }}</button>
+    </SplitPanel>
+  </Split>
 </template>
 
-<style scoped>
-.marin {
-  width: 100vw;
-  height: 100vh;
-}
-.demo-split-pane{
-width:100%;
+<style>
+.splitpanes__pane {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  position: relative;
 }
 
+em.specs {
+  font-size: 0.2em;
+  line-height: 1;
+  position: absolute;
+  bottom: 0.5em;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+
+html,
+body,
+#app {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  font-family: Helvetica, Arial, sans-serif;
+  font-size: 5em;
+}
+
+p {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  z-index: 10;
+  font-size: 12px;
+
+  a {}
+}
 </style>
